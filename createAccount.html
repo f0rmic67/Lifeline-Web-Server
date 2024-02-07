@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Account</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+
+        <script>
+            //display proper form for chosen account type
+            function accountType(){
+
+            }
+            //validate user input before submitting form
+            function validateStudent(){
+
+            }
+            //validate user input before submitting form
+            function validateEMS(){
+
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Lifeline</h1>
+        <br>
+        <br>
+        <h2>Create Account</h2>
+        <br>
+        <br>
+        <label>Account Type:</label>
+        <select name="accType">
+            <option value="student">Student</option>
+            <option value="ems">EMS</option>
+        </select>
+        <br>
+
+        <!--forms will hide and display based on user input for account type-->
+
+        <form id="studentForm" onsubmit="validateStudent()" style="display:none">
+            <label>Username:</label>
+            <input type="text" name="sUser" value="">
+            <br>
+            <br>
+            <label>Email:</label>
+            <input type="text" name="sEmail" value="">
+            <br>
+            <br>
+            <label>ID Number:</label>
+            <input type="number" name="sID" value="">
+            <br>
+            <br>
+            <label>Password:</label>
+            <input type="password" name="sPass1" value="">
+            <br>
+            <br>
+            <label>Re-Enter Password:</label>
+            <input type="password" name="sPass2" value="">
+            <br>
+            <br>
+            <input type="submit" name="studentAccSubmit" value="Create Student Account">
+        </form>
+
+        <form id="emsForm" onsubmit="validateEMS()" style="display:none">
+            <label>Username:</label>
+            <input type="text" name="sUser" value="">
+            <br>
+            <br>
+            <label>Email:</label>
+            <input type="text" name="sEmail" value="">
+            <br>
+            <br>
+            <label>EMS ID:</label>
+            <input type="text" name="sID" value="">
+            <br>
+            <br>
+            <label>Password:</label>
+            <input type="password" name="sPass1" value="">
+            <br>
+            <br>
+            <label>Re-Enter Password:</label>
+            <input type="password" name="sPass2" value="">
+            <br>
+            <br>
+            <input type="submit" name="emsAccSubmit" value="Create EMS Account">
+        </form>
+    </body>
+</html>

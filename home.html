@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lifeline Home</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+
+        <script>
+            //functions to validate user input before sending to server
+            function validateSearch(){
+
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Lifeline</h1>
+        <br>
+        <br>
+        <h3>Search Student ID</h3>
+        <!--searchDB.php not yet implemented-->
+        <form id="searchHome" action="searchDB.php" method="post" onsubmit="return validateSearch()">
+            <label>Student ID number:</label>
+            <input type="number" name="studentID_home" value="">
+        </form>
+        <br>
+        <a href="login.html">
+            <button id="login_home">Login</button>
+        </a>
+        <br>
+        <br>
+        <a href="createAccount.html">
+            <button id="createAccount_home">Create Account</button>
+        </a>
+
+        <br>
+        <br>
+        <br>
+        <!--temporary buttons to navigate pages without full functionality-->
+        <a href="studentHome.html">
+            <button id="studentHome">Student Home</button>
+        </a>
+        <a href="emsHome.html">
+            <button id="emsHome">EMS Home</button>
+        </a>
+        <a href="emsAdminHome.html">
+            <button id="emsAdminHome">EMS Admin Home</button>
+        </a>
+    </body>
+</html>

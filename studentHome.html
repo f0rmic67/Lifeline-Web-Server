@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student Home</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+
+        <script>
+            function validateSearch(){
+
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Lifeline</h1>
+        <br>
+        <br>
+        <h2>Student Home</h2>
+        <br>
+        <br>
+        <h3>Search Student ID</h3>
+        <!--searchDB.php not yet implemented-->
+        <form id="searchHome" action="searchDB.php" method="post" onsubmit="return validateSearch()">
+            <label>Student ID number:</label>
+            <input type="number" name="studentID_home" value="">
+        </form>
+        <br>
+        <a href="info.html">
+            <button id="studentInfo">Enter or Modify Emergency Information</button>
+        </a>
+        <br>
+        <br>
+        <a href="modifyStudentAccount.html">
+            <button id="modifyStudentAccount">Modify Account Information</button>
+        </a>
+
+        <br>
+        <br>
+        <br>
+        <!--temporary buttons to navigate pages without full functionality-->
+        <a href="studentHome.html">
+            <button id="studentHome">Student Home</button>
+        </a>
+        <a href="emsHome.html">
+            <button id="emsHome">EMS Home</button>
+        </a>
+        <a href="emsAdminHome.html">
+            <button id="emsAdminHome">EMS Admin Home</button>
+        </a>
+    </body>
+</html>
