@@ -3,20 +3,16 @@
     <head>
         <title>Lifeline Home</title>
         <link rel="stylesheet" type="text/css" href="main.css">
-
-        <script>
-            //functions to validate user input before sending to server
-            function validateSearch(){
-
-            }
-        </script>
+        <script src="functions.js"></script>
     </head>
+    
     <body>
         <h1>Lifeline</h1>
         <br>
         <br>
         <h3>Search Student ID</h3>
         <!--searchDB.php not yet implemented-->
+        <!--may be implemented with JS or Python instead of PHP-->
         <form id="searchHome" action="searchDB.php" method="post" onsubmit="return validateSearch()">
             <label>Student ID number:</label>
             <input type="number" name="studentID_home" value="">
