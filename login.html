@@ -3,6 +3,9 @@
     <head>
         <title>Login</title>
         <link rel="stylesheet" type="text/css" href="main.css">
+        <script src= "jquery-3.2.1.min.js"></script>
+        <script src = "jquery-ui.min.js"></script>
+        <script src = "sweetalert2.all.min.js"></script>
         <script src="functions.js"></script>
     </head>
 
@@ -13,16 +16,21 @@
         <h2>Login</h2>
         <br>
 
-        <form id="loginPage" onsubmit="validateLogin()">
+        
             <label>Email:</label>
-            <input type="text" name="logEmail" value="">
+            <input id = 'email'type="text" name="logEmail" value="">
             <br>
             <br>
             <label>Password:</label>
-            <input type="password" name="logPass" value="">
+            <input id = 'pass'type="password" name="logPass" value="">
             <br>
             <br>
-            <input type="submit" name="submitLogin" value="Login">
-        </form>
+            <button id='subLog' class = 'btn btn-primary'type="submit">Login</button>
+        
     </body>
+    <script>
+        $("document").ready(function(){
+            loadPage();
+        });
+    </script>
 </html>
