@@ -23,29 +23,29 @@
 
         <!--forms will hide and display based on user input for account type-->
 
-        <form id="studentForm" onsubmit="validateStudent()" style="display:none">
+        <div>
             <label>Username:</label>
-            <input type="text" name="sUser" value="">
+            <input id='studentUserName'type="text" name="sUser" value="">
             <br>
             <br>
             <label>Email:</label>
-            <input type="text" name="sEmail" value="">
+            <input id='studentEmail' type="text" name="sEmail" value="">
             <br>
             <br>
             <label>ID Number:</label>
-            <input type="number" name="sID" value="">
+            <input id="studentIdNumber" type="number" name="sID" value="">
             <br>
             <br>
             <label>Password:</label>
-            <input type="password" name="sPass1" value="">
+            <input id="studentPass" type="password" name="sPass1" value="">
             <br>
             <br>
             <label>Re-Enter Password:</label>
-            <input type="password" name="sPass2" value="">
+            <input id="studentReEnterPass" type="password" name="sPass2" value="">
             <br>
             <br>
-            <input type="submit" name="studentAccSubmit" value="Create Student Account">
-        </form>
+            <button id="btnCreateStudentAcc" type="button" class="btn btn-primary">Create Student Account</button>
+        </div>
 
         <form id="emsForm" onsubmit="validateEMS()" style="display:none">
             <label>Username:</label>
@@ -68,10 +68,15 @@
             <input type="password" name="sPass2" value="">
             <br>
             <br>
-            <input type="submit" name="emsAccSubmit" value="Create EMS Account">
+            <button id="createEmsAcc" type="button" class="btn btn-primary" name="emsAccSubmit">Create EMS Account</button>
         </form>
     </body>
     <script src= "jquery-3.2.1.min.js"></script>
     <script src = "jquery-ui.min.js"></script>
     <script src = "sweetalert2.all.min.js"></script>
+    <script>
+        $('document').ready(function(){
+            loadPage();
+        });
+    </script>
 </html>

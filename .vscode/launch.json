@@ -7,8 +7,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open login.html",
-            "file": "/Users/anthony/lifeline2:15/Lifeline-Web-Server/login.html"
+            "name": "Open createAccount.html",
+            "file": "/Users/anthony/lifeline2:15/Lifeline-Web-Server/createAccount.html"
         }
     ]
 }
