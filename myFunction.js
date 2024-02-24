@@ -40,8 +40,8 @@ function openLogin(){
 	card.style.transform = "rotateY(0deg)";
 }
 
-var x = document.getElementById("login");
-var y = document.getElementById("register");
+var x = document.getElementById("loginPage");
+var y = document.getElementById("registerPage");
 var z = document.getElementById("btn");
 
 function register(){
