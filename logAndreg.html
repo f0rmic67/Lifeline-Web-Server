@@ -20,7 +20,7 @@
 			</div>
 			<div class="login">
 				<form id="loginPage" onsubmit="validateLogin()" class="input-group">
-					<input type="text" class="input-box" placeholder="Username/Email Address" required>	
+					<input type="text" class="input-box" placeholder="Username" required>	
 					<input type="password" class="input-box" placeholder="Password" required>
 					<input type="checkbox" class="check-box"><span>Remember Me</span>
 					<button type="submit" class="submit-btn">Login</button>
@@ -28,11 +28,12 @@
 				</form>
 			</div>
 			<div class="register">
-				<form id="register" class="input-group">
-					<select>
+				<form id="registerPage" class="input-group">
+					<select id="accType" onchange="accountType()">
 						<option class="hidden" selected disabled>Please select an Account Type</option>
 						<option value="1">Student Account</option>
 						<option value="2">EMS Account</option>
+						<option value="2">Admin Account</option>
 					</select>
 					<input type="text" class="input-box" placeholder="Username" required>		
 					<input type="email" class="input-box" placeholder="Your Email Address" required>
@@ -48,4 +49,3 @@
 	</div>
 	<script src="myFunction.js"></script>
 </body>
-</html>
