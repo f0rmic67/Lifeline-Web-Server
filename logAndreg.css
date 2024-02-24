@@ -128,9 +128,9 @@ select > option.hidden{
 	bottom: 66px;
 	position: absolute;
 }
-#login{
+#loginPage{
 	left: 50px;
 }
-#register{
+#registerPage{
 	left: 450px;
 }
