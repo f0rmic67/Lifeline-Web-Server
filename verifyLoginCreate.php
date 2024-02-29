@@ -15,8 +15,8 @@
         $username = filter_input(INPUT_POST, "username");
         $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
         $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
-        $password1 = filter_input(INPUT_POST, "password1");
-        $password2 = filter_input(INPUT_POST, "password2");
+        $pass1 = filter_input(INPUT_POST, "password1");
+        $pass2 = filter_input(INPUT_POST, "password2");
         $accType = filter_input(INPUT_POST, "accType");
 
         if($username == ''){
@@ -34,13 +34,13 @@
         if($id == FALSE){
             $error_msg = "ID number not valid.";
         }
-        if($password1 == ''){
+        if($pass1 == ''){
             $error_msg = "Password must be entered.";
         }
-        if($password2 == ''){
+        if($pass2 == ''){
             $error_msg = "Password must be entered.";
         }
-        if($password1 != $password2){
+        if($pass1 != $pass2){
             $error_msg = "Passwords do not match.";
         }
 
@@ -51,35 +51,65 @@
         }
         else{
             //search DB for existing account with the same information
-            var_dump($_SESSION);
+            
             //create account entry in database
-            $query = "INSERT INTO student_user(student_id, email, password, username) VALUES (:id, :email, :password, :username)";
+            $query = "INSERT INTO student_user(student_id, email, pass, username) VALUES (:id, :email, :pass, :username)";
             $insert = $db->prepare($query);
             $insert->bindParam(":id", $id);
             $insert->bindParam(":email", $email);
-            $insert->bindParam(":password", $password);
+            $insert->bindParam(":pass", $pass1);
             $insert->bindParam(":username", $username);
 
             //debugging output
             if($insert->execute()){
                 echo "Insert successful";
+                //add profile info to $_SESSION array for account type + user validation in other pages
+                header("Location:HomePage.html");
+                exit();
             }
             else{
                 echo "Insert failed";
+                //add error message
+                include("logAndreg.php");
+                exit();
             }
         }
     }
     //validate input and query database to confirm account credentials
     else if($action == "login"){
         $username = filter_input(INPUT_POST, "username");
-        $password = filter_input(INPUT_POST, "password");
+        $pass = filter_input(INPUT_POST, "password");
 
         if($username == ''){
             $error_msg = "Username must be entered.";
         }
-        if($password == ''){
+        if($pass == ''){
             $error_msg = "Password must be entered.";
         }
+        else{
+            $search = "SELECT * FROM student_user WHERE username = :username AND pass = :pass;";
+            $searchQuery = $db->prepare($search);
+            $searchQuery->bindParam(":username", $username);
+            $searchQuery->bindParam(":pass", $pass);
 
+            if($searchQuery->execute()){
+                $account = $searchQuery->fetchAll();
+                $searchQuery->closeCursor();
+                
+                if($account && $username == $account[0]['username'] && $pass == $account[0]["pass"]){
+                    echo "login successful";
+                    //add account info to $_SESSION array
+                    header("Location:HomePage.html");
+                    exit();
+                }
+                else{
+                    echo "login failed";
+                }
+            }
+            else{
+                echo "Query failed";
+
+            }
+        }
     }
 ?>
