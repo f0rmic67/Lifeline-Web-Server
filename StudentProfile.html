@@ -1,0 +1,138 @@
+<html>
+<head>
+	<title>Student Profile</title>
+	<link rel="stylesheet" href="StudentProfile.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/832441b8c8.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<style>
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+   </style>
+</head>
+<body> 
+	<div class="studentprofile">
+		<nav>
+			<h1>Username</h1>
+			<form id="searchHome" action="searchDB.php" method="post" onsubmit="return validateSearch()">
+				<label>Search Student ID Number:</label>
+				<input type="number" name="studentID_home" value="">
+			</form>
+		</nav>
+		<div class="information">
+			<script src="myFunction.js"></script>
+			<form id="accountinformation" onsubmit="validateInformation()" class="input-group">
+				<label>First Name:</label>
+				<input type="text" class="input-box" required><br>
+				
+				<label>Last Name:</label>
+				<input type="text" class="input-box" required><br>
+				
+				<label>Student ID:</label>
+				<input type="number" class="input-box" required><br>
+				
+				<label>Student Email:</label>
+				<input type="email" class="input-box" required><br>
+				
+				<label>Date of Birth:</label>
+				<input type="date" class="input-box" placeholder="Date of Birth" required><br>
+				
+				<label>Have you been diagnosed with heart problems?</label>
+				<select id="heartProblems" onchange="heartProblems()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, heart problem and any medications:</label><br>
+				<textarea id="heartProblem" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Do you use a pacemaker?</label>
+				<select id="pacemakers" onchange="pacemakers()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, any pacemaker medications:</label><br>
+				<textarea id="pacemaker" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Have you been diagnosed with diabetes?</label>
+				<select id="diabetes" onchange="diabetes()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, diabetes type and any medications:</label><br>
+				<textarea id="diabete" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Have you been diagnosed with high blood pressure?</label>
+				<select id="highBloodPressure" onchange="highBloodPressure()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, any high blood pressure medications:</label><br>
+				<textarea id="highBP" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Have you ever had a stroke?</label>
+				<select id="Strokes" onchange="Strokes()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, any stroke medications:</label><br>
+				<textarea id="stroke" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Do you have asthma?</label>
+				<select id="Asthma" onchange="Asthma()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, any asthma medications:</label><br>
+				<textarea id="asthma" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Have you ever had a seizure?</label>
+				<select id="Seizures" onchange="Seizures()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, any seizure medications:</label><br>
+				<textarea id="seizure" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Have you ever been diagnosed with cancer?</label>
+				<select id="Cancer" onchange="Cancer()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, type and any medications:</label><br>
+				<textarea id="cancer" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Do you have any allergies?</label>
+				<select id="Allergies" onchange="Allergies()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, any allergy medications:</label><br>
+				<textarea id="allergy" disabled rows="4" cols="94"></textarea><br>
+				
+				<label>Is there anything else medical related you would like to share?</label>
+				<select id="Other" onchange="Other()">
+					<option value="1">No</option>
+					<option value="2">Yes</option>
+				</select><br>
+				<label>If yes, what other conditions and medications:</label><br>
+				<textarea id="other" disabled rows="4" cols="94"></textarea><br>
+			</form>
+			<br>
+			<label>Emergency Contact:</label>
+			<form id="emergencyContact" class="input-group">
+				<label>First Name:</label>
+				<input type="text" class="input-box" required><br>
+				<label>Last Name:</label>
+				<input type="text" class="input-box" required><br>
+				<label for="phone">Enter their phone number:</label>
+				<input type="tel" class="phoneNum" id="phone" name="phone" placeholder="###-###-####" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+			</form>	
+			<button type="submit" class="submit-btn">Save Information</button>
+		</div>
+	</div>
+</body>
+</html>
