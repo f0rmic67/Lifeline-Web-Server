@@ -1,3 +1,4 @@
+
 //functions to validate user input before sending to server
 function validateSearch(){
 
@@ -54,3 +55,4 @@ function login(){
 	y.style.left = "450px";
 	z.style.left = "0px";
 }
+

@@ -1,5 +1,11 @@
 <?php
 	require_once("db_connect.php");
+
+	if(!isset($error_msg)) {$error_msg = '';}
+
+	if($error_msg != ''){
+		echo "<script>alert('$error_msg');</script>";
+	}
 ?>
 
 <html>
@@ -14,7 +20,7 @@
 <body>
 	<div class="hero">
 		<div class="back">
-			<a href="HomePage.html"><i class="fa-solid fa-arrow-left"></i> Back</a>
+			<a href="HomePage.php"><i class="fa-solid fa-arrow-left"></i> Back</a>
 		</div>
 		<div class="form-box">
 			<div class="button-box">
@@ -39,6 +45,7 @@
 						<option value="2">EMS Account</option>
 						<option value="3">Admin Account</option>
 					</select>
+					
 					<input type="text" class="input-box" name="username" placeholder="Username" required>		
 					<input type="email" class="input-box" name="email" placeholder="Your Email Address" required>
 					<input type="number" class="input-box" name="id" placeholder="ID Number" required>

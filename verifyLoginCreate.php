@@ -51,25 +51,62 @@
         }
         else{
             //search DB for existing account with the same information
+            /*
+            $query = "SELECT * FROM user WHERE username = :username OR email = :email OR id = :id";
+            $search = $db->prepare($query);
+            $search->bindParam(":username", $username);
+            $search->bindParam(":email", $email);
+            $search->bindParam(":id", $id);
+            $search->execute();
+            $account = $search->fetchAll();
+            $search->closeCursor();
+
+            //if account with matching credentials already exists, give error message and exit
+            //not working yet
             
+            if(count($account) == 0){
+                $error_msg = "Account credentials already in use, please use unique credentials.";
+                include("logAndreg.php");
+                exit();
+            }
+            */
+
             //create account entry in database
-            $query = "INSERT INTO student_user(student_id, email, pass, username) VALUES (:id, :email, :pass, :username)";
+            $query = "INSERT INTO user(id, email, pass, username, account_type) VALUES (:id, :email, :pass, :username, :acc_type)";
             $insert = $db->prepare($query);
             $insert->bindParam(":id", $id);
             $insert->bindParam(":email", $email);
             $insert->bindParam(":pass", $pass1);
             $insert->bindParam(":username", $username);
+            $insert->bindParam(":acc_type", $accType);
+
+            
 
             //debugging output
             if($insert->execute()){
                 echo "Insert successful";
                 //add profile info to $_SESSION array for account type + user validation in other pages
-                header("Location:HomePage.html");
+                $_SESSION['id'] = $id;
+                $_SESSION['acc_type'] = $accType;
+
+                //create medical and emergency contact tables if student account
+                if($accType == 1){
+                    $query = "INSERT INTO student_medical_info(student_id, id) VALUES (:id, :id)";
+                    $insert = $db->prepare($query);
+                    $insert->bindParam("id", $id);
+                    $insert->execute();
+
+                    $query = "INSERT INTO emergency_contacts(student_id, id) VALUES (:id, :id)";
+                    $insert = $db->prepare($query);
+                    $insert->bindParam("id", $id);
+                    $insert->execute();
+                }
+
+                header("Location:HomePage.php");
                 exit();
             }
             else{
-                echo "Insert failed";
-                //add error message
+                $error_msg = "Account creation failed.";
                 include("logAndreg.php");
                 exit();
             }
@@ -87,7 +124,7 @@
             $error_msg = "Password must be entered.";
         }
         else{
-            $search = "SELECT * FROM student_user WHERE username = :username AND pass = :pass;";
+            $search = "SELECT * FROM user WHERE username = :username AND pass = :pass;";
             $searchQuery = $db->prepare($search);
             $searchQuery->bindParam(":username", $username);
             $searchQuery->bindParam(":pass", $pass);
@@ -98,12 +135,19 @@
                 
                 if($account && $username == $account[0]['username'] && $pass == $account[0]["pass"]){
                     echo "login successful";
-                    //add account info to $_SESSION array
-                    header("Location:HomePage.html");
+                    //add account info to $_SESSION array for reference on other pages
+                    $_SESSION['id'] = $account[0]['id'];
+                    $_SESSION['acc_type'] = $account[0]['account_type'];
+                    //maybe create logged_in session token for checking if a user is logged in
+                    //could also just check if username or acc type are set, but may be more readable later
+                    //maybe set acc_type to 0 if not logged in 
+                    header("Location:HomePage.php");
                     exit();
                 }
                 else{
-                    echo "login failed";
+                    $error_msg = "Login failed, no account with entered credentials found.";
+                    include("logAndreg.php");
+                    exit();
                 }
             }
             else{

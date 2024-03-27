@@ -6,7 +6,6 @@
     //output connection status for debugging
     try {
         $db = new PDO($dsn, $username, $password); //creates PDO
-        echo '<p> You are connected. </p>';
     }
     catch (PDOException $e){
         $error_message = $e->getMessage();
