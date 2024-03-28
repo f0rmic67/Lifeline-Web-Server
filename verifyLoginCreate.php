@@ -51,7 +51,6 @@
         }
         else{
             //search DB for existing account with the same information
-            /*
             $query = "SELECT * FROM user WHERE username = :username OR email = :email OR id = :id";
             $search = $db->prepare($query);
             $search->bindParam(":username", $username);
@@ -64,51 +63,52 @@
             //if account with matching credentials already exists, give error message and exit
             //not working yet
             
-            if(count($account) == 0){
+            if(!empty($account)){
                 $error_msg = "Account credentials already in use, please use unique credentials.";
                 include("logAndreg.php");
                 exit();
             }
-            */
-
-            //create account entry in database
-            $query = "INSERT INTO user(id, email, pass, username, account_type) VALUES (:id, :email, :pass, :username, :acc_type)";
-            $insert = $db->prepare($query);
-            $insert->bindParam(":id", $id);
-            $insert->bindParam(":email", $email);
-            $insert->bindParam(":pass", $pass1);
-            $insert->bindParam(":username", $username);
-            $insert->bindParam(":acc_type", $accType);
+            else{
+                //create account entry in database
+                $query = "INSERT INTO user(id, email, pass, username, account_type) VALUES (:id, :email, :pass, :username, :acc_type)";
+                $insert = $db->prepare($query);
+                $insert->bindParam(":id", $id);
+                $insert->bindParam(":email", $email);
+                $insert->bindParam(":pass", $pass1);
+                $insert->bindParam(":username", $username);
+                $insert->bindParam(":acc_type", $accType);
 
             
 
-            //debugging output
-            if($insert->execute()){
-                echo "Insert successful";
-                //add profile info to $_SESSION array for account type + user validation in other pages
-                $_SESSION['id'] = $id;
-                $_SESSION['acc_type'] = $accType;
+                //debugging output
+                if($insert->execute()){
+                    echo "Insert successful";
+                    //add profile info to $_SESSION array for account type + user validation in other pages
+                    $_SESSION['id'] = $id;
+                    $_SESSION['acc_type'] = $accType;
 
-                //create medical and emergency contact tables if student account
-                if($accType == 1){
-                    $query = "INSERT INTO student_medical_info(student_id, id) VALUES (:id, :id)";
-                    $insert = $db->prepare($query);
-                    $insert->bindParam("id", $id);
-                    $insert->execute();
+                    //create medical and emergency contact tables if student account
+                    if($accType == 1){
+                        $query = "INSERT INTO student_medical_info(student_id, id) VALUES (:id, :id)";
+                        $insert = $db->prepare($query);
+                        $insert->bindParam("id", $id);
+                        $insert->execute();
 
-                    $query = "INSERT INTO emergency_contacts(student_id, id) VALUES (:id, :id)";
-                    $insert = $db->prepare($query);
-                    $insert->bindParam("id", $id);
-                    $insert->execute();
+                        $query = "INSERT INTO emergency_contacts(student_id, id) VALUES (:id, :id)";
+                        $insert = $db->prepare($query);
+                        $insert->bindParam("id", $id);
+                        $insert->execute();
+
+                        header("Location:HomePage.php");
+                        exit();
+                    }
+                    
                 }
-
-                header("Location:HomePage.php");
-                exit();
-            }
-            else{
-                $error_msg = "Account creation failed.";
-                include("logAndreg.php");
-                exit();
+                else{
+                    $error_msg = "Account creation failed.";
+                    include("logAndreg.php");
+                    exit();
+                }
             }
         }
     }
