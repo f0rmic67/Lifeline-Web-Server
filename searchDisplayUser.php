@@ -83,7 +83,7 @@
 		<div class="information">
             <?php echo "<h1>".$displayUser['first_name']." ".$displayUser["last_name"]."</h1>"; ?>
 			<br>
-            <?php if($_SESSION['id'] == 2 || $_SESSION['id'] == 3) { ?>
+            <?php if($_SESSION['acc_type'] == 2 || $_SESSION['acc_type'] == 3) { ?>
 			    <h2>Date of Birth: <?php echo $displayMed['dob']; ?></h2>
                 <br>
             <?php } ?>
@@ -92,7 +92,7 @@
             <h3>Relation: <?php echo $displayContact['relation']; ?> </h3>
             <h3>Phone Number: <?php echo $displayContact['phone_number']; ?> </h3>
             <br>
-            <?php if($_SESSION['id'] == 2 || $_SESSION['id'] == 3) { ?>
+            <?php if($_SESSION['acc_type'] == 2 || $_SESSION['acc_type'] == 3) { ?>
 			    <h2>Heart Problems: 
                     <?php if($displayMed['heart_problems'] == 1) { 
                         echo "Yes </h2>"; ?> 
