@@ -16,6 +16,16 @@
 	position: absolute;
 	overflow: auto;
 }
+.upload{
+	height: 100%;
+	width: 100%;
+	background-image: linear-gradient(rgba(0,0,0,0.4),
+	rgba(0,0,0,0.4)),url(images/PennwestCalCampus.png);
+	background-position: center;
+	background-size: cover;
+	position: absolute;
+	overflow: auto;
+}
 
 nav{
 	font-size: 20;
@@ -34,6 +44,7 @@ nav{
 	margin-bottom: 75px;
 	background: #fff;
 	padding: 15px;
+	text-align: center;
 }
 
 .information select{
@@ -90,4 +101,8 @@ textarea{
 	border: 0;
 	outline: none;
 	border-radius: 30px;
+}
+
+table{
+	align-self: center;
 }

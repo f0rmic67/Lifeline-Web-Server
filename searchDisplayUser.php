@@ -5,7 +5,7 @@
 	}
 
     require_once("db_connect.php");
-
+    
     $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
     $query = "SELECT id FROM user WHERE id = :id";
@@ -40,6 +40,16 @@
                 $displayMed = $select->fetch();
                 $select->closeCursor();
             }
+
+            //save search to recent_lookups table
+            $query = "INSERT INTO recent_lookups(search_time, student_id) VALUES (:search_time, :id)";
+            $insert = $db->prepare($query);
+            //get timestamp for search
+            $search_time = date('Y-m-d H:i:s');
+            $insert->bindParam(":search_time", $search_time);
+            $insert->bindParam(":id", $id);
+            $insert->execute();
+            $insert->closeCursor();
         }
         else{
             $error_msg = "No user found.";

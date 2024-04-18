@@ -46,8 +46,7 @@
 
         //if error occurs, redirect to login page and display error message
         if($error_msg != ''){
-            include("logAndreg.php");
-            exit();
+            
         }
         else{
             //search DB for existing account with the same information
@@ -65,8 +64,7 @@
             
             if(!empty($account)){
                 $error_msg = "Account credentials already in use, please use unique credentials.";
-                include("logAndreg.php");
-                exit();
+                
             }
             else{
                 //create account entry in database
@@ -82,8 +80,7 @@
                     //return to login page without creating account if ID is not valid
                     if(empty($match)){
                         $error_msg = "Account creation failed, EMS ID is not registered as a valid EMS employee.";
-                        include("logAndreg.php");
-                        exit();
+                        
                     }
                 }
 
@@ -124,13 +121,10 @@
                         $update->execute();
                     }
 
-                    header("Location:HomePage.php");
-                    exit();
                 }
                 else{
                     $error_msg = "Account creation failed.";
-                    include("logAndreg.php");
-                    exit();
+                    
                 }
             }
         }
@@ -164,13 +158,11 @@
                     //maybe create logged_in session token for checking if a user is logged in
                     //could also just check if username or acc type are set, but may be more readable later
                     //maybe set acc_type to 0 if not logged in 
-                    header("Location:HomePage.php");
-                    exit();
+                    
                 }
                 else{
                     $error_msg = "Login failed, no account with entered credentials found.";
-                    include("logAndreg.php");
-                    exit();
+                    
                 }
             }
             else{

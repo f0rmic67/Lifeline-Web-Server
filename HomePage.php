@@ -58,9 +58,9 @@
 	<?php if($_SESSION['acc_type'] == 1) { ?>
 		<a href="StudentProfile.php" class="hero-btn">Upload Emergency Information</a>
 	<?php } else if($_SESSION['acc_type'] == 2 || $_SESSION['acc_type'] == 3) {?>
-		<a href="" class="hero-btn">See Recent Lookups</a>
+		<a href="recentLookups.php" class="hero-btn">See Recent Lookups</a>
 	<?php } if($_SESSION['acc_type'] == 3) { ?>
-		<br><br><a href="" class="hero-btn">Upload Department EMS Credential Sheet</a>
+		<br><br><a href="uploadSheet.php" class="hero-btn">Upload Department EMS Credential Sheet</a>
 	<?php } ?>
 
 </div>
