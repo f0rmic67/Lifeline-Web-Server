@@ -43,6 +43,15 @@
         if($pass1 != $pass2){
             $error_msg = "Passwords do not match.";
         }
+        if($accType == 1 && floor(log10($id) + 1) != 16){
+            $error_msg = "Student ID must be 16-digit number.";
+        }
+        if($accType != 1 && floor(log10($id) + 1) != 12){
+            $error_msg = "EMS ID must be 12-digit number.";
+        }
+        if($accType == 1 && strtolower(substr($email, -13)) != "@pennwest.edu"){
+            $error_msg = "Students must register with their PennWest email.";
+        }
 
         //if error occurs, redirect to login page and display error message
         if($error_msg != ''){
@@ -91,7 +100,7 @@
                 $insert = $db->prepare($query);
                 $insert->bindParam(":id", $id);
                 $insert->bindParam(":email", $email);
-                $insert->bindParam(":pass", $pass1);
+                $insert->bindParam(":pass", hash('sha256', $pass1));
                 $insert->bindParam(":username", $username);
                 $insert->bindParam(":acc_type", $accType);
 
@@ -139,6 +148,7 @@
     else if($action == "login"){
         $username = filter_input(INPUT_POST, "username");
         $pass = filter_input(INPUT_POST, "password");
+        $pass = hash('sha256', $pass);
 
         if($username == ''){
             $error_msg = "Username must be entered.";
