@@ -16,7 +16,7 @@ def create_account():
         response_code, error_message = DataBaseUtils.register(reg)
         # If we successfully created an account, save the id and account type for the session
         if response_code == Response.SUCCESS:
-            encoded_jwt = jwt.encode({"id": reg.id, "accType":reg.accType}, app.secret_key, algorithm="HS256")
+            encoded_jwt = jwt.encode({"id": reg.id, "accType":reg.accType}, app.secret_key, algorithm="HS256").decode("utf-8")
             response = LoginResponse(error_message, response_code, encoded_jwt)
         else:
             response = LoginResponse(error_message, response_code)
@@ -37,7 +37,7 @@ def login():
         if session_info is None:
             response = LoginResponse("No such account exists.", Response.INVALID)
         else:            
-            encoded_jwt = jwt.encode({"id": session_info[0], "accType":session_info[1]}, app.secret_key, algorithm="HS256")
+            encoded_jwt = jwt.encode({"id": session_info[0], "accType":session_info[1]}, app.secret_key, algorithm="HS256").decode("utf-8")
             response = LoginResponse("Login Successful", Response.SUCCESS, encoded_jwt)
     else:
         response = LoginResponse(error_message, Response.INVALID)
