@@ -43,20 +43,23 @@
 						<option class="hidden" selected disabled>Please select an Account Type</option>
 						<option value="1">Student Account</option>
 						<option value="2">EMS Account</option>
-						<option value="3">Admin Account</option>
 					</select>
 					
-					<input type="text" class="input-box" name="username" placeholder="Username" required>		
-					<input type="email" class="input-box" name="email" placeholder="Your Email Address" required>
-					<input type="number" class="input-box" name="id" placeholder="ID Number" required>
-					<input type="password" class="input-box" name="password1" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-					title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-					<input type="password" class="input-box" name="password2" placeholder="Re-Enter Password" required>
-					<input type="checkbox" class="check-box"><span>I agree to the <a href="">Terms & Conditions</a></span>
-					<button type="submit" name="submit" class="submit-btn" value="createAccount">Register</button>
+					
+						<input type="text" class="input-box" name="username" placeholder="Username" required>		
+						<input type="email" class="input-box" name="email" placeholder="Your Email Address" required>
+						<input type="number" class="input-box" name="id" placeholder="ID Number" required>
+						<input type="password" class="input-box" name="password1" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+						title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+						<input type="password" class="input-box" name="password2" placeholder="Re-Enter Password" required>
+						<input type="checkbox" class="check-box"><span>I agree to the <a href="">Terms & Conditions</a></span>
+						<button type="submit" name="submit" class="submit-btn" value="createAccount">Register</button>
+					
 				</form>
 			</div>
+			
 		</div>
+		<h2>Please contact lifeline.senior.project@gmail.com to request an admin account</h2>
 	</div>
 	<script src="myFunction.js"></script>
 </body>

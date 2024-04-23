@@ -40,7 +40,7 @@
 			</form>
 		</nav>
 		<div class="information">
-            <table>
+            <table id="recent">
                 <tr>
                     <th>Searched Student ID</th>
                     <th>Search Time</th>

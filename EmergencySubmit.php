@@ -7,7 +7,7 @@
     //encryption setup
     $hash = hash('sha256', $_SESSION['id']);
     //hash student ID  and use substring as cipher key
-    $key = substr($hash, 9, 9);
+    $key = substr($hash, 9, 16);
     //encryption method
     $method = "aes-128-cbc";
     //initialization vector, set to last 16 bytes of hashed user ID

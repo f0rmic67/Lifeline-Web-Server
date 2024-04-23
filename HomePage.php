@@ -36,11 +36,10 @@
 			<ul>
 				<li><a href="HomePage.php">HOME</a></li>
 				<?php if($_SESSION['acc_type'] == 0){ ?>
-					<li><a href="logAndreg.php">LOGIN</a></li>
+					<li><a href="logAndreg.php">LOGIN/REGISTER</a></li>
 				<?php } else{ ?>
-					<li><a href="logout.php">LOG OUT</li>
+					<li><a href="logout.php">LOG OUT</a></li>
 				<?php } ?>
-				<li><a href="">ABOUT</a></li>
 			</ul>
 		</div>
 		<i class="fa-solid fa-bars" onclick="showMenu()"></i>
@@ -60,7 +59,7 @@
 	<?php } else if($_SESSION['acc_type'] == 2 || $_SESSION['acc_type'] == 3) {?>
 		<a href="recentLookups.php" class="hero-btn">See Recent Lookups</a>
 	<?php } if($_SESSION['acc_type'] == 3) { ?>
-		<br><br><a href="uploadSheet.php" class="hero-btn">Upload Department EMS Credential Sheet</a>
+		<br><br><a href="uploadSheet.php" class="hero-btn">Register and Edit Department Personnel</a>
 	<?php } ?>
 
 </div>
@@ -74,15 +73,15 @@
 	<div class="row">
 		<div class="account-type">
 			<h3>Student Account</h3>
-			<p>A student account can...</p>
+			<p>A student account can store medical information to be seen ONLY by EMS personnel in the case of a medical emergency.</p>
 		</div>
 		<div class="account-type">
 			<h3>EMS Account</h3>
-			<p>An EMS account can...</p>
+			<p>An EMS account can view the medical information of students to quickly and effectively gain pertinent information for a patient's treatment.</p>
 		</div>
 		<div class="account-type">
-			<h3>Administrator Account</h3>
-			<p>An administrator account can...</p>
+			<h3>EMS Administrator Account</h3>
+			<p>An administrator account can add EMS personnel to the registry so they can be verified while making an account.</p>
 		</div>
 	</div>
 </section>
@@ -116,20 +115,11 @@
 
 <!-----------Contact Us--------------->
 <section class="contact">
-	<h1>Questions or concerns?<br>Click the button to share with us</h1>
-	<a href="" class="hero-btn">CONTACT US</a>
+	<h1>Questions or concerns?<br>Want to request an admin account for your EMS department?<br>You can reach us at<br>lifeline.senior.project@gmail.com</h1>
 </section>
 
 <!--------- Footer ------------>
 <section class="footer">
-	<h4>About Us</h4>
-	<p>fhasjdfkaskfsjfhsjfhsdjf</p>
-	<div class="icons">
-		<i class="fa-brands fa-facebook"></i>
-		<i class="fa-brands fa-x-twitter"></i>
-		<i class="fa-brands fa-instagram"></i>
-		<i class="fa-brands fa-linkedin"></i>
-	</div>
 	<p>Made by Joshua Panaro, Jeremiah Neff, Anthony Stepich, and
 	Christian Beatty</p>
 </section>

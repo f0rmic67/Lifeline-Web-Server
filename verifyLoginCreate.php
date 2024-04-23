@@ -42,7 +42,7 @@
         }
         if($pass1 != $pass2){
             $error_msg = "Passwords do not match.";
-        }
+        }/*
         if($accType == 1 && floor(log10($id) + 1) != 16){
             $error_msg = "Student ID must be 16-digit number.";
         }
@@ -51,7 +51,7 @@
         }
         if($accType == 1 && strtolower(substr($email, -13)) != "@pennwest.edu"){
             $error_msg = "Students must register with their PennWest email.";
-        }
+        }*/
 
         //if error occurs, redirect to login page and display error message
         if($error_msg != ''){

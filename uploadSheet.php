@@ -40,6 +40,7 @@
 					echo "<td>".$employee['ems_id']."</td>";
 					echo "<td>".$employee['fname']."</td>";
 					echo "<td>".$employee['lname']."</td>";
+					echo "<td><form action='removeEmployee.php' method='post'><input type='hidden' name='id' value=".$employee['ems_id']."><input type='submit' value='Remove Personnel'></td></form>";
 					echo "</tr>";
 				}
 				echo "</table>";
