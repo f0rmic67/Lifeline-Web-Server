@@ -94,7 +94,8 @@ def get_recent_searches():
 
 if __name__ == '__main__':
     app.secret_key = 'c5710a1f4104edb233cebb4d2d5e6ec7'
-    app.run(host='0.0.0.0', debug=True)
+    context = ('lifeline-project.net.crt', 'lifeline-project.net.key')
+    app.run(host='0.0.0.0', debug=True, ssl_context=context)
     """
 
     SELECT * FROM user WHERE account_type = 2
