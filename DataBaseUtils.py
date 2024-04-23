@@ -2,6 +2,7 @@
 import mysql.connector
 from EntityClasses import *
 from datetime import datetime
+import hashlib
 
 def register(registrationEntity):
     returnTuple = (Response.INVALID, "")
@@ -31,8 +32,10 @@ def register(registrationEntity):
                 ems_full_name = cursor.fetchone()
             
             # If the account type is not EMS or the account type is and there is EMS data, create the account
-            if registrationEntity.accType != 2 or ems_full_name is not None:    
-                query = 'INSERT INTO user(id, email, pass, username, account_type) VALUES (%d, "%s", "%s", "%s", %d)'%(registrationEntity.id, registrationEntity.email, registrationEntity.password, registrationEntity.username, registrationEntity.accType)
+            if registrationEntity.accType != 2 or ems_full_name is not None: 
+                
+                password_hash = hashlib.sha256(registrationEntity.password.encode()).hexdigest()
+                query = 'INSERT INTO user(id, email, pass, username, account_type) VALUES (%d, "%s", "%s", "%s", %d)'%(registrationEntity.id, registrationEntity.email, password_hash, registrationEntity.username, registrationEntity.accType)
                 cursor.execute(query)
                 print(query)
                 returnTuple = (Response.SUCCESS, "Account Created")
@@ -69,8 +72,9 @@ def login(loginEntity):
                                 database='Lifeline') as cnx:
         cursor = cnx.cursor()
 
+        password_hash = hashlib.sha256(loginEntity.password.encode()).hexdigest()
         # Get all users with credentials matching the ones entered by the user
-        query = 'SELECT id, account_type FROM user WHERE username = "%s" AND pass = "%s"'%(loginEntity.username, loginEntity.password)
+        query = 'SELECT id, account_type FROM user WHERE username = "%s" AND pass = "%s"'%(loginEntity.username, password_hash)
         print(query)
         cursor.execute(query)
         result = cursor.fetchone()
