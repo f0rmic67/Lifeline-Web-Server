@@ -4,32 +4,41 @@
 		session_start();
 	}
 
+    //encryption setup
+    $hash = hash('sha256', $_SESSION['id']);
+    //hash student ID  and use substring as cipher key
+    $key = substr($hash, 9, 9);
+    //encryption method
+    $method = "aes-128-cbc";
+    //initialization vector, set to last 16 bytes of hashed user ID
+    $iv = substr($hash, -16, 16);
+
     require_once("db_connect.php");
 
     $fname = filter_input(INPUT_POST, "fname");
     $lname = filter_input(INPUT_POST, "lname");
     $dob = filter_input(INPUT_POST, "dob");
 
-    $heart = filter_input(INPUT_POST, "heartProblems");
-    $heartmed = filter_input(INPUT_POST, "heartProblem");
-    $pacemaker = filter_input(INPUT_POST, "pacemakers");
-    $pacemakermed = filter_input(INPUT_POST, "pacemaker");
-    $diabetes = filter_input(INPUT_POST, "diabetes");
-    $diabetesmed = filter_input(INPUT_POST, "diabete");
-    $bp = filter_input(INPUT_POST, "highBloodPressure");
-    $bpmed = filter_input(INPUT_POST, "highBP");
-    $stroke = filter_input(INPUT_POST, "Strokes");
-    $strokemed = filter_input(INPUT_POST, "stroke");
-    $asthma = filter_input(INPUT_POST, "Asthma");
-    $asthmamed = filter_input(INPUT_POST, "asthma");
-    $seizure = filter_input(INPUT_POST, "Seizures");
-    $seizuremed = filter_input(INPUT_POST, "seizure");
-    $cancer = filter_input(INPUT_POST, "Cancer");
-    $cancermed = filter_input(INPUT_POST, "cancer");
-    $allergy = filter_input(INPUT_POST, "Allergies");
-    $allergymed = filter_input(INPUT_POST, "allergy");
-    $other = filter_input(INPUT_POST, "Other");
-    $othermed = filter_input(INPUT_POST, "other");
+    $heart = openssl_encrypt(filter_input(INPUT_POST, "heartProblems"), $method, $key, 0, $iv);
+    $heartmed = openssl_encrypt(filter_input(INPUT_POST, "heartProblem"), $method, $key, 0, $iv);
+    $pacemaker = openssl_encrypt(filter_input(INPUT_POST, "pacemakers"), $method, $key, 0, $iv);
+    $pacemakermed = openssl_encrypt(filter_input(INPUT_POST, "pacemaker"), $method, $key, 0, $iv);
+    $diabetes = openssl_encrypt(filter_input(INPUT_POST, "diabetes"), $method, $key, 0, $iv);
+    $diabetesmed = openssl_encrypt(filter_input(INPUT_POST, "diabete"), $method, $key, 0, $iv);
+    $bp = openssl_encrypt(filter_input(INPUT_POST, "highBloodPressure"), $method, $key, 0, $iv);
+    $bpmed = openssl_encrypt(filter_input(INPUT_POST, "highBP"), $method, $key, 0, $iv);
+    $stroke = openssl_encrypt(filter_input(INPUT_POST, "Strokes"), $method, $key, 0, $iv);
+    $strokemed = openssl_encrypt(filter_input(INPUT_POST, "stroke"), $method, $key, 0, $iv);
+    $asthma = openssl_encrypt(filter_input(INPUT_POST, "Asthma"), $method, $key, 0, $iv);
+    $asthmamed = openssl_encrypt(filter_input(INPUT_POST, "asthma"), $method, $key, 0, $iv);
+    $seizure = openssl_encrypt(filter_input(INPUT_POST, "Seizures"), $method, $key, 0, $iv);
+    $seizuremed = openssl_encrypt(filter_input(INPUT_POST, "seizure"), $method, $key, 0, $iv);
+    $cancer = openssl_encrypt(filter_input(INPUT_POST, "Cancer"), $method, $key, 0, $iv);
+    $cancermed = openssl_encrypt(filter_input(INPUT_POST, "cancer"), $method, $key, 0, $iv);
+    $allergy = openssl_encrypt(filter_input(INPUT_POST, "Allergies"), $method, $key, 0, $iv);
+    $allergymed = openssl_encrypt(filter_input(INPUT_POST, "allergy"), $method, $key, 0, $iv);
+    $other = openssl_encrypt(filter_input(INPUT_POST, "Other"), $method, $key, 0, $iv);
+    $othermed = openssl_encrypt(filter_input(INPUT_POST, "other"), $method, $key, 0, $iv);
 
     $efname = filter_input(INPUT_POST, "efname");
     $elname = filter_input(INPUT_POST, "elname");
