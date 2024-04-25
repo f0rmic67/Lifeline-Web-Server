@@ -42,7 +42,7 @@
         }
         if($pass1 != $pass2){
             $error_msg = "Passwords do not match.";
-        }/*
+        }
         if($accType == 1 && floor(log10($id) + 1) != 16){
             $error_msg = "Student ID must be 16-digit number.";
         }
@@ -51,7 +51,7 @@
         }
         if($accType == 1 && strtolower(substr($email, -13)) != "@pennwest.edu"){
             $error_msg = "Students must register with their PennWest email.";
-        }*/
+        }
 
         //if error occurs, redirect to login page and display error message
         if($error_msg != ''){
@@ -171,9 +171,6 @@
                     //add account info to $_SESSION array for reference on other pages
                     $_SESSION['id'] = $account[0]['id'];
                     $_SESSION['acc_type'] = $account[0]['account_type'];
-                    //maybe create logged_in session token for checking if a user is logged in
-                    //could also just check if username or acc type are set, but may be more readable later
-                    //maybe set acc_type to 0 if not logged in 
                     header("Location:HomePage.php");
                     exit();
                 }

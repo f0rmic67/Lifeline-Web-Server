@@ -59,7 +59,6 @@
 			</div>
 			
 		</div>
-		<h2>Please contact lifeline.senior.project@gmail.com to request an admin account</h2>
 	</div>
 	<script src="myFunction.js"></script>
 </body>

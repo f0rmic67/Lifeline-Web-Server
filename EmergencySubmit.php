@@ -1,44 +1,36 @@
 <?php
+    require('encrypt.php');
+    require_once("db_connect.php");
+
     $status = session_status();
 	if($status == PHP_SESSION_NONE){
 		session_start();
 	}
 
-    //encryption setup
-    $hash = hash('sha256', $_SESSION['id']);
-    //hash student ID  and use substring as cipher key
-    $key = substr($hash, 9, 16);
-    //encryption method
-    $method = "aes-128-cbc";
-    //initialization vector, set to last 16 bytes of hashed user ID
-    $iv = substr($hash, -16, 16);
-
-    require_once("db_connect.php");
-
     $fname = filter_input(INPUT_POST, "fname");
     $lname = filter_input(INPUT_POST, "lname");
     $dob = filter_input(INPUT_POST, "dob");
 
-    $heart = openssl_encrypt(filter_input(INPUT_POST, "heartProblems"), $method, $key, 0, $iv);
-    $heartmed = openssl_encrypt(filter_input(INPUT_POST, "heartProblem"), $method, $key, 0, $iv);
-    $pacemaker = openssl_encrypt(filter_input(INPUT_POST, "pacemakers"), $method, $key, 0, $iv);
-    $pacemakermed = openssl_encrypt(filter_input(INPUT_POST, "pacemaker"), $method, $key, 0, $iv);
-    $diabetes = openssl_encrypt(filter_input(INPUT_POST, "diabetes"), $method, $key, 0, $iv);
-    $diabetesmed = openssl_encrypt(filter_input(INPUT_POST, "diabete"), $method, $key, 0, $iv);
-    $bp = openssl_encrypt(filter_input(INPUT_POST, "highBloodPressure"), $method, $key, 0, $iv);
-    $bpmed = openssl_encrypt(filter_input(INPUT_POST, "highBP"), $method, $key, 0, $iv);
-    $stroke = openssl_encrypt(filter_input(INPUT_POST, "Strokes"), $method, $key, 0, $iv);
-    $strokemed = openssl_encrypt(filter_input(INPUT_POST, "stroke"), $method, $key, 0, $iv);
-    $asthma = openssl_encrypt(filter_input(INPUT_POST, "Asthma"), $method, $key, 0, $iv);
-    $asthmamed = openssl_encrypt(filter_input(INPUT_POST, "asthma"), $method, $key, 0, $iv);
-    $seizure = openssl_encrypt(filter_input(INPUT_POST, "Seizures"), $method, $key, 0, $iv);
-    $seizuremed = openssl_encrypt(filter_input(INPUT_POST, "seizure"), $method, $key, 0, $iv);
-    $cancer = openssl_encrypt(filter_input(INPUT_POST, "Cancer"), $method, $key, 0, $iv);
-    $cancermed = openssl_encrypt(filter_input(INPUT_POST, "cancer"), $method, $key, 0, $iv);
-    $allergy = openssl_encrypt(filter_input(INPUT_POST, "Allergies"), $method, $key, 0, $iv);
-    $allergymed = openssl_encrypt(filter_input(INPUT_POST, "allergy"), $method, $key, 0, $iv);
-    $other = openssl_encrypt(filter_input(INPUT_POST, "Other"), $method, $key, 0, $iv);
-    $othermed = openssl_encrypt(filter_input(INPUT_POST, "other"), $method, $key, 0, $iv);
+    $heart = encryptData(filter_input(INPUT_POST, "heartProblems"), $key);
+    $heartmed = encryptData(filter_input(INPUT_POST, "heartProblem"), $key);
+    $pacemaker = encryptData(filter_input(INPUT_POST, "pacemakers"), $key);
+    $pacemakermed = encryptData(filter_input(INPUT_POST, "pacemaker"), $key);
+    $diabetes = encryptData(filter_input(INPUT_POST, "diabetes"), $key);
+    $diabetesmed = encryptData(filter_input(INPUT_POST, "diabete"), $key);
+    $bp = encryptData(filter_input(INPUT_POST, "highBloodPressure"), $key);
+    $bpmed = encryptData(filter_input(INPUT_POST, "highBP"), $key);
+    $stroke = encryptData(filter_input(INPUT_POST, "Strokes"), $key);
+    $strokemed = encryptData(filter_input(INPUT_POST, "stroke"), $key);
+    $asthma = encryptData(filter_input(INPUT_POST, "Asthma"), $key);
+    $asthmamed = encryptData(filter_input(INPUT_POST, "asthma"), $key);
+    $seizure = encryptData(filter_input(INPUT_POST, "Seizures"), $key);
+    $seizuremed = encryptData(filter_input(INPUT_POST, "seizure"), $key);
+    $cancer = encryptData(filter_input(INPUT_POST, "Cancer"), $key);
+    $cancermed = encryptData(filter_input(INPUT_POST, "cancer"), $key);
+    $allergy = encryptData(filter_input(INPUT_POST, "Allergies"), $key);
+    $allergymed = encryptData(filter_input(INPUT_POST, "allergy"), $key);
+    $other = encryptData(filter_input(INPUT_POST, "Other"), $key);
+    $othermed = encryptData(filter_input(INPUT_POST, "other"), $key);
 
     $efname = filter_input(INPUT_POST, "efname");
     $elname = filter_input(INPUT_POST, "elname");

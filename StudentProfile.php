@@ -6,6 +6,7 @@
 	}
 
 	require_once("db_connect.php");
+	require('encrypt.php');
 
 	//pull existing emergency info from table and populate fields
 	$search = "SELECT * FROM student_medical_info WHERE student_id = :id";
@@ -69,87 +70,87 @@
 				<input type="text" class="input-box" name="lname" id="last_name" value="<?php if($account[0]['last_name'] != '') {echo $account[0]['last_name']; } ?>" required><br>
 				
 				<label>Date of Birth:</label>
-				<input type="date" class="input-box" placeholder="Date of Birth" name="dob" id="dob" value="<?php if($existingInfo[0]['dob'] != '') {echo $existingInfo[0]['dob']; } ?>" required><br>
+				<input type="date" class="input-box" placeholder="Date of Birth" name="dob" id="dob" value="<?php if($existingInfo[0]['dob'] != '') {echo decryptData($existingInfo[0]['dob'], $key); } ?>" required><br>
 				
 				<label>Have you been diagnosed with heart problems?</label>
 				<select name="heartProblems" id="heart_problems" onchange="heartProblems()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['heart_problems'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['heart_problems'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, heart problem and any medications:</label><br>
-				<textarea name="heartProblem" id="heart_problems_medications" rows="4" cols="90"><?php if($existingInfo[0]['heart_problems_medications'] != '') {echo $existingInfo[0]['heart_problems_medications']; } ?></textarea><br>
+				<textarea name="heartProblem" id="heart_problems_medications" rows="4" cols="90"><?php if($existingInfo[0]['heart_problems_medications'] != '') {echo decryptData($existingInfo[0]['heart_problems_medications'], $key); } ?></textarea><br>
 				
 				<label>Do you use a pacemaker?</label>
 				<select name="pacemakers" id="pacemaker" onchange="pacemakers()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['pacemaker'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['pacemaker'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, any pacemaker medications:</label><br>
-				<textarea name="pacemaker" id="pacemaker_medications" rows="4" cols="90" ><?php if($existingInfo[0]['pacemaker_medications'] != '') {echo $existingInfo[0]['pacemaker_medications']; } ?></textarea><br>
+				<textarea name="pacemaker" id="pacemaker_medications" rows="4" cols="90" ><?php if($existingInfo[0]['pacemaker_medications'] != '') {echo decryptData($existingInfo[0]['pacemaker_medications'], $key); } ?></textarea><br>
 				
 				<label>Have you been diagnosed with diabetes?</label>
 				<select name="diabetes" id="diabetes" onchange="diabetes()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['diabetes'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['diabetes'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, diabetes type and any medications:</label><br>
-				<textarea name="diabete" id="diabetes_medications" rows="4" cols="90" ><?php if($existingInfo[0]['diabetes_medications'] != '') {echo $existingInfo[0]['diabetes_medications']; } ?></textarea><br>
+				<textarea name="diabete" id="diabetes_medications" rows="4" cols="90" ><?php if($existingInfo[0]['diabetes_medications'] != '') {echo decryptData($existingInfo[0]['diabetes_medications'], $key); } ?></textarea><br>
 				
 				<label>Have you been diagnosed with high blood pressure?</label>
 				<select name="highBloodPressure" id="high_bp" onchange="highBloodPressure()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['high_bp'] == 1) { ?> selected="selected" <?php } ?>>Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['high_bp'], $key) == 1) { ?> selected="selected" <?php } ?>>Yes</option>
 				</select><br>
 				<label>If yes, any high blood pressure medications:</label><br>
-				<textarea name="highBP" id="high_bp_medications" rows="4" cols="90" ><?php if($existingInfo[0]['high_bp_medications'] != '') {echo $existingInfo[0]['high_bp_medications']; } ?></textarea><br>
+				<textarea name="highBP" id="high_bp_medications" rows="4" cols="90" ><?php if($existingInfo[0]['high_bp_medications'] != '') {echo decryptData($existingInfo[0]['high_bp_medications'], $key); } ?></textarea><br>
 				
 				<label>Have you ever had a stroke?</label>
 				<select name="Strokes" id="stroke" onchange="Strokes()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['stroke'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['stroke'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, any stroke medications:</label><br>
-				<textarea name="stroke" id="stroke_medications" rows="4" cols="90" ><?php if($existingInfo[0]['stroke_medications'] != '') {echo $existingInfo[0]['stroke_medications']; } ?></textarea><br>
+				<textarea name="stroke" id="stroke_medications" rows="4" cols="90" ><?php if($existingInfo[0]['stroke_medications'] != '') {echo decryptData($existingInfo[0]['stroke_medications'], $key); } ?></textarea><br>
 				
 				<label>Do you have asthma or COPD?</label>
 				<select name="Asthma" id="asthma_copd" onchange="Asthma()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['asthma_copd'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['asthma_copd'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, any asthma or COPD medications:</label><br>
-				<textarea name="asthma" id="asthma_copd_medications" rows="4" cols="90" ><?php if($existingInfo[0]['asthma_copd_medications'] != '') {echo $existingInfo[0]['asthma_copd_medications']; } ?></textarea><br>
+				<textarea name="asthma" id="asthma_copd_medications" rows="4" cols="90" ><?php if($existingInfo[0]['asthma_copd_medications'] != '') {echo decryptData($existingInfo[0]['asthma_copd_medications'], $key); } ?></textarea><br>
 				
 				<label>Have you ever had a seizure?</label>
 				<select name="Seizures" id="seizures" onchange="Seizures()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['seizures'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['seizures'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, any seizure medications:</label><br>
-				<textarea name="seizure" id="seizures_medications" rows="4" cols="90" ><?php if($existingInfo[0]['seizures_medications'] != '') {echo $existingInfo[0]['seizures_medications']; } ?></textarea><br>
+				<textarea name="seizure" id="seizures_medications" rows="4" cols="90" ><?php if($existingInfo[0]['seizures_medications'] != '') {echo decryptData($existingInfo[0]['seizures_medications'], $key); } ?></textarea><br>
 				
 				<label>Have you ever been diagnosed with cancer?</label>
 				<select name="Cancer" id="cancer" onchange="Cancer()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['cancer'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['cancer'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, type and any medications:</label><br>
-				<textarea name="cancer" id="cancer_medications" rows="4" cols="90" ><?php if($existingInfo[0]['cancer_medications'] != '') {echo $existingInfo[0]['cancer_medications']; } ?></textarea><br>
+				<textarea name="cancer" id="cancer_medications" rows="4" cols="90" ><?php if($existingInfo[0]['cancer_medications'] != '') {echo decryptData($existingInfo[0]['cancer_medications'], $key); } ?></textarea><br>
 				
 				<label>Do you have any allergies?</label>
 				<select name="Allergies" id="allergies" onchange="Allergies()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['allergies'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['allergies'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, allergies and medications:</label><br>
-				<textarea name="allergy" id="allergies_medications" rows="4" cols="90" ><?php if($existingInfo[0]['allergies_medications'] != '') {echo $existingInfo[0]['allergies_medications']; } ?></textarea><br>
+				<textarea name="allergy" id="allergies_medications" rows="4" cols="90" ><?php if($existingInfo[0]['allergies_medications'] != '') {echo decryptData($existingInfo[0]['allergies_medications'], $key); } ?></textarea><br>
 				
 				<label>Is there anything else medical related you would like to share?</label>
 				<select name="Other" id="other" onchange="Other()">
 					<option value="0">No</option>
-					<option value="1" <?php if($existingInfo[0]['other'] == 1) { ?> selected="selected" <?php } ?> >Yes</option>
+					<option value="1" <?php if(decryptData($existingInfo[0]['other'], $key) == 1) { ?> selected="selected" <?php } ?> >Yes</option>
 				</select><br>
 				<label>If yes, what other conditions and medications:</label><br>
-				<textarea name="other" rows="4" cols="90" ><?php if($existingInfo[0]['other_medications'] != '') {echo $existingInfo[0]['other_medications']; } ?></textarea><br>
+				<textarea name="other" rows="4" cols="90" ><?php if($existingInfo[0]['other_medications'] != '') {echo decryptData($existingInfo[0]['other_medications'], $key); } ?></textarea><br>
 				<br>
 				<h3>Emergency Contact</h3><br>
 				<label>First Name:</label>

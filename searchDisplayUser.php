@@ -1,10 +1,11 @@
 <?php
+    require_once("db_connect.php");
+    require('encrypt.php');
+
     $status = session_status();
 	if($status == PHP_SESSION_NONE){
 		session_start();
 	}
-
-    require_once("db_connect.php");
     
     $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
@@ -33,15 +34,6 @@
 
             //only retreive medical info if account type is EMS or EMS admin
             if($_SESSION['acc_type'] == 2 || $_SESSION['acc_type'] == 3){
-                //set decryption variables
-                $hash = hash('sha256', $id);
-                //hash student ID  and use substring as cipher key
-                $key = substr($hash, 9, 16);
-                //encryption method
-                $method = "aes-128-cbc";
-                //initialization vector, set to last 16 bytes of hashed user ID
-                $iv = substr($hash, -16, 16);
-
                 $query = "SELECT * FROM student_medical_info WHERE student_id = :id";
                 $select = $db->prepare($query);
                 $select->bindParam(":id", $id);
@@ -71,6 +63,7 @@
         include("HomePage.php");
         exit();
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -113,92 +106,92 @@
             <br>
             <?php if($_SESSION['acc_type'] == 2 || $_SESSION['acc_type'] == 3) { ?>
 			    <h2>Heart Problems: 
-                    <?php if(openssl_decrypt($displayMed['heart_problems'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['heart_problems'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['heart_problems_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['heart_problems_medications'], $key); ?>
                         </textarea> <br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>Pacemaker: 
-                    <?php if(openssl_decrypt($displayMed['pacemaker'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['pacemaker'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['pacemaker_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['pacemaker_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>Diabetes: 
-                    <?php if(openssl_decrypt($displayMed['diabetes'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['diabetes'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['diabetes_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['diabetes_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>High Blood Pressure: 
-                    <?php if(openssl_decrypt($displayMed['high_bp'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['high_bp'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['high_bp_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['high_bp_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>Strokes: 
-                    <?php if(openssl_decrypt($displayMed['stroke'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['stroke'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['stroke_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['stroke_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>Asthma or COPD: 
-                    <?php if(openssl_decrypt($displayMed['asthma_copd'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['asthma_copd'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['asthma_copd_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['asthma_copd_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>Seizures: 
-                    <?php if(openssl_decrypt($displayMed['seizures'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['seizures'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['seizures_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['seizures_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>Cancer: 
-                    <?php if(openssl_decrypt($displayMed['cancer'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['cancer'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['cancer_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['cancer_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>Allergies: 
-                    <?php if(openssl_decrypt($displayMed['allergies'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['allergies'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['allergies_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['allergies_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
                 <h2>Other Conditions: 
-                    <?php if(openssl_decrypt($displayMed['other'], $method, $key, 0, $iv) == '1') { 
+                    <?php if(decryptData($displayMed['other'], $key) == '1') { 
                         echo "Yes </h2>"; ?> 
                         <h3>Diagnoses and/or medications:</h3>
                         <textarea rows="4" cols="90" readonly>
-                            <?php echo openssl_decrypt($displayMed['other_medications'], $method, $key, 0, $iv); ?>
+                            <?php echo decryptData($displayMed['other_medications'], $key); ?>
                         </textarea><br>
                     <?php } else{ echo "No </h2>"; }?>
                 <br>
