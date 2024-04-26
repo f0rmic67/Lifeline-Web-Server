@@ -87,6 +87,8 @@ class StudentInfo:
         if self.medical_info is not None:
             for key, value in self.medical_info.items():
                 if key != "id" and key != "student_id" and key != "dob" and value != None:
+                    if type(value) is not str:
+                        value = str(value)
                     self.medical_info[key] = encrypt_data(value)
 
     def decrypt(self):
@@ -94,6 +96,8 @@ class StudentInfo:
             for key, value in self.medical_info.items():
                 print(key, end=" ")
                 if key != "id" and key != "student_id" and key != "dob" and value != None:
+                    if type(value) is not str:
+                        value = str(value)
                     self.medical_info[key] = decrypt_data(value)
 
     def has_info(self):
