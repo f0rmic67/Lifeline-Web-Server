@@ -193,7 +193,10 @@ def test():
         print(result)
     return result
 
-if __name__ == '__main__':
-    test()
-    # (1, 'John', 'Smith', 'test@gmail.com', 'Testpass1', 'test', 1)
-    # e_first_name': 'Jane', 'e_last_name': 'Smith', 'relation': 'wife', 'phone_number': '111-222-3333'
+if __name__ == "__main__":
+    from EncryptionUtils import *
+    res = search_student_info(1, True)
+    print(res.to_dict())
+    print("\n**************\n")
+    res.decrypt()
+    print(res.to_dict())

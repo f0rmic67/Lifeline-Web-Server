@@ -1,3 +1,5 @@
+from EncryptionUtils import *
+
 class Response:
     SUCCESS = 200
     UNAUTHORIZED = 401
@@ -80,6 +82,19 @@ class StudentInfo:
             'emergency_contact':self.emergency_contact,
             'medical_info':self.medical_info
         }
+
+    def encrypt(self):
+        if self.medical_info is not None:
+            for key, value in self.medical_info.items():
+                if key != "id" and key != "student_id" and key != "dob" and value != None:
+                    self.medical_info[key] = encrypt_data(value)
+
+    def decrypt(self):
+        if self.medical_info is not None:
+            for key, value in self.medical_info.items():
+                print(key, end=" ")
+                if key != "id" and key != "student_id" and key != "dob" and value != None:
+                    self.medical_info[key] = decrypt_data(value)
 
     def has_info(self):
         return self.full_name is not None and self.emergency_contact is not None and self.medical_info is not None

@@ -16,7 +16,7 @@ def create_account():
         response_code, error_message = DataBaseUtils.register(reg)
         # If we successfully created an account, save the id and account type for the session
         if response_code == Response.SUCCESS:
-            encoded_jwt = jwt.encode({"id": reg.id, "accType":reg.accType}, app.secret_key, algorithm="HS256").decode("utf-8")
+            encoded_jwt = jwt.encode({"id": reg.id, "accType":reg.accType}, app.secret_key, algorithm="HS256")#.decode("utf-8")
             response = LoginResponse(error_message, response_code, encoded_jwt)
         else:
             response = LoginResponse(error_message, response_code)
@@ -37,12 +37,19 @@ def login():
         if session_info is None:
             response = LoginResponse("No such account exists.", Response.INVALID)
         else:            
-            encoded_jwt = jwt.encode({"id": session_info[0], "accType":session_info[1]}, app.secret_key, algorithm="HS256").decode("utf-8")
+            encoded_jwt = jwt.encode({"id": session_info[0], "accType":session_info[1]}, app.secret_key, algorithm="HS256")#.decode("utf-8")
             response = LoginResponse("Login Successful", Response.SUCCESS, encoded_jwt)
     else:
         response = LoginResponse(error_message, Response.INVALID)
 
-    return jsonify(response.to_dict())
+    try:
+        dictionary = response.to_dict()
+        print(dictionary)
+        jsonified = jsonify(dictionary)
+    except Exception as e:
+        print(e)
+        exit(0)
+    return jsonified
 
 @app.route('/studentInfo', methods=['GET', 'POST'])
 def search_id():
@@ -58,6 +65,10 @@ def search_id():
         print("Should get med info:", should_get_medical_info)
         response = DataBaseUtils.search_student_info(idToSearch, should_get_medical_info)
         
+        # If we should get medical info, decrypt it so the user can read it
+        if should_get_medical_info:
+            response.decrypt()
+
         if response.has_info() and not is_self_lookup:
             DataBaseUtils.record_lookup_timestamp(idToSearch)
 
@@ -69,6 +80,7 @@ def search_id():
 
         studentInfo = StudentInfo.from_dict(request.json)
         print("Student info:", studentInfo.to_dict())
+        studentInfo.encrypt()
         try:
             DataBaseUtils.update_student_info(token['id'], studentInfo)
             print("Info updated")
@@ -94,8 +106,7 @@ def get_recent_searches():
 
 if __name__ == '__main__':
     app.secret_key = 'c5710a1f4104edb233cebb4d2d5e6ec7'
-    context = ('lifeline-project.net.crt', 'lifeline-project.net.key')
-    app.run(host='0.0.0.0', debug=True, ssl_context=context)
+    app.run(host='0.0.0.0', debug=True)
     """
 
     SELECT * FROM user WHERE account_type = 2
