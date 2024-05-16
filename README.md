@@ -1,7 +1,9 @@
 # Lifeline-Web-Server
 Senior Project repository for Lifeline Web Server: Christian Beatty, Jeremiah Neff, Joshua Panaro, Anthony Stepich.
 
-NOTE: This is a proof-of-concept project and is not intended for medical use.
+Website link: lifeline-project.net
+
+NOTE: This is a proof-of-concept project and is not intended for medical use. Do not enter any sensitive medical data on the website.
 
 To deploy this site, upload all .php, .js, and .css files to the htdocs folder of an Apache web server. all .py, .crt, and .key files should be placed in a subdirectory named api. Alternatively, the same can be achieved on a local machine using xampp. 
 
